@@ -1,0 +1,5 @@
+(library
+ (libraries base str sexplib)
+ (inline_tests)
+ (name monkey)
+ (preprocess (pps ppx_inline_test ppx_jane)))
