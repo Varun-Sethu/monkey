@@ -1,6 +1,0 @@
-(executable
- (libraries base sexplib)
- (public_name monkey)
- (modes byte exe)
- (name main)
- (preprocess (pps ppx_inline_test ppx_jane)))
