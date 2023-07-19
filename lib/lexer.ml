@@ -4,9 +4,21 @@ module SC = Set.Make(Char)
 let (let+) = Option.bind
 
 (* models the current state of the lexer *)
-type t = { stream: string; current_char: int; }
+type t = 
+  { 
+    stream: string; 
+    current_char: int; 
+    current_line: int;
+    current_column: int 
+  }
 
-let new_lexer ~stream = { stream; current_char = 0; }
+let new_lexer ~stream = 
+  { 
+    stream;
+    current_char = 0;
+    current_line = 0;
+    current_column = 0;
+  }
 
 let skip_curr_char ~lexer = { lexer with current_char = lexer.current_char + 1 }
 let peek_curr_char ~lexer = if lexer.current_char < String.length lexer.stream then Some lexer.stream.[lexer.current_char]

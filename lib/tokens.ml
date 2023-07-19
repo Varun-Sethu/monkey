@@ -51,6 +51,15 @@ type token =
   | Variable of (string [@compare.ignore])
 [@@deriving sexp, compare]
 
+(* contains information regarding where this token was consumed from the file stream *)
+type token_properties = 
+  {
+    token: token;
+    line: int; [@compare.ignore]
+    column: int [@compare.ignore]
+  }
+[@@deriving sexp, compare]
+
 let whitespace_charachters = 
   let open (Set.Make(Char)) in 
     of_list [

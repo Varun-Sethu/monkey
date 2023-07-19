@@ -3,6 +3,9 @@ open Syntax
 include ParserState
 
 let (let+) = Option.bind
+type parse_result = 
+  | Result of (expr_node * t)
+  | Error of (string * string * string) (* error on line x col y *)
 
 (* Core parsing logic for parsing the actual syntax of the monkey language itself *)
 (* repeatedly consume statements until we cannot anymore *)
@@ -125,13 +128,6 @@ and parse_block_expression ~parser =
   let+ parser = consume_if_token ~parser ~token:RCurly in
 
   Some ({ node = Expression (BlockExpression { statements; final_expr }); resolved_type = None; }, parser)
-
-
-
-
-
-
-
 
 
 

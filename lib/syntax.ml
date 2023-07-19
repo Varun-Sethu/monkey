@@ -32,6 +32,7 @@ type type_annotation =
   | String
   | Bool
   | Unit
+  | Function of (type_annotation list * type_annotation)
   | Custom of string
 [@@deriving sexp]
 
@@ -42,7 +43,7 @@ type expression_t = unit [@@deriving sexp]
 (* annotates AST blocks with their type *)
 (* programs are simply a list of statements with an identified main function (entry point) *)
 type 'a node_t = 
-  { node: 'a node; resolved_type: type_annotation option }
+  { node: 'a node; mutable resolved_type: type_annotation option }
 
 and expr_node = expression_t node_t
 and statement_node = statement_t node_t
